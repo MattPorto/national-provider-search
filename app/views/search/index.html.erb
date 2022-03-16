@@ -20,7 +20,14 @@
         </thead>
 
         <tbody>
-
+          <% @result.each do |provider|  %>
+            <tr>
+              <td><%= provider.npi %></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
