@@ -16,7 +16,7 @@ class Base
   def has_errors?(response)
     error_response = response.status != 200
 
-    errors = error_response ? response : response['Errors']
+    errors = error_response ? response.body : parsed_response(response)['Errors']
     return unless errors
 
     messages = error_response ? errors : errors.pluck('description').join('; ')

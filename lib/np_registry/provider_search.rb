@@ -7,10 +7,11 @@ class ProviderSearch < Base
 
   def import_provider
     response = request_provider
-    parsed = parsed_response response
 
     # threat errors
     has_errors? response
+
+    parsed = parsed_response response
 
     # return no results
     return "No Provider found." unless provider_found?(parsed)
