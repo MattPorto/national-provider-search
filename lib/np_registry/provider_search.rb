@@ -14,7 +14,7 @@ class ProviderSearch < Base
     parsed = parsed_response response
 
     # return no results
-    return "No Provider found." unless provider_found?(parsed)
+    raise "No Provider found." unless provider_found?(parsed)
 
     # add to cache if has data
     save_provider

@@ -2,6 +2,14 @@
   <h1 class="text-2xl">National Provider Identifier Search</h1>
 
   <div class="w-full mt-4 p-6 shadow-lg rounded-lg border border-slate-50">
+    <% flash.each do |type, msg| %>
+      <div class="w-full mb-8 flex justify-center">
+        <div class="w-1/2 h-max text-white rounded-md py-2 <%= type.eql?('alert') ? "bg-red-500" : "bg-green-500" %>">
+          <%= msg %>
+        </div>
+      </div>
+    <% end %>
+
     <%= form_with url: search_index_path, method: :get do |form| %>
       <%= form.text_field :search_key, placeholder: 'NPI'%>
 
@@ -13,6 +21,7 @@
         <thead>
           <tr>
             <th>NPI</th>
+            <th>Name</th>
             <th>Address</th>
             <th>Type</th>
             <th>Taxonomy</th>
@@ -23,6 +32,7 @@
           <% @result.each do |provider|  %>
             <tr>
               <td><%= provider.npi %></td>
+              <td>-</td>
               <td>-</td>
               <td>-</td>
               <td>-</td>

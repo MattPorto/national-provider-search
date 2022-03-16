@@ -20,7 +20,7 @@ RSpec.describe ProviderSearch, type: :lib do
     it 'no providers found' do
       search_key = "1234567890"
 
-      expect(import_provider search_key).to eq "No Provider found."
+      expect { import_provider search_key }.to raise_error "No Provider found."
     end
 
     it 'save provider' do
