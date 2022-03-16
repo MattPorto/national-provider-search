@@ -38,3 +38,6 @@ yarn-debug.log*
 /.idea/cmt-app.iml
 /.idea/git_toolbox_prj.xml
 /.idea/vcs.xml
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
