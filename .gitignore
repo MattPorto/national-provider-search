@@ -34,3 +34,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+/.idea/.gitignore
+/.idea/cmt-app.iml
+/.idea/git_toolbox_prj.xml
+/.idea/vcs.xml
