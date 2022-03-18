@@ -66,7 +66,7 @@ RSpec.describe 'Searches', type: :request do
         end
 
         context 'get provider cache' do
-          let!(:provider) { create :provider_cache }
+          let!(:provider) { create :provider_cache, :with_full_setup }
 
           it 'retaining previous results' do
             get '/search'
