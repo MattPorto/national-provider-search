@@ -1,7 +1,7 @@
 <div class="w-full text-center">
   <h1 class="text-2xl">National Provider Identifier Search</h1>
 
-  <div class="w-full mt-4 p-6 shadow-lg rounded-lg border border-slate-50">
+  <div class="w-full mt-4 p-6 shadow-lg rounded-lg border border-slate-50" data-controller="search-form">
     <% flash.each do |type, msg| %>
       <div class="w-full mb-8 flex justify-center">
         <div class="w-1/2 h-max text-white rounded-md py-2 <%= type.eql?('alert') ? "bg-red-500" : "bg-green-500" %>">
@@ -10,20 +10,27 @@
       </div>
     <% end %>
 
-    <%= form_with url: search_index_path, method: :get do |form| %>
-      <%= form.text_field :search_key, placeholder: 'NPI'%>
+    <%= form_with url: search_index_path, method: :get, class: 'flex items-center justify-center',
+                  html: {
+                    'data-search-form-target': 'form',
+                    'data-action': 'submit->search-form#searchKeyValidation'
+                  } do |form|%>
+      <%= form.text_field :search_key, placeholder: 'NPI', class: 'rounded-full border-slate-300', 'data-search-form-target': 'searchKey'%>
 
-      <%= form.submit 'Search' %>
+      <%= form.button 'Search',
+                      class: 'ml-2 bg-blue-500 text-white w-max p-2 rounded-lg h-9 w-14 flex items-center justify-center shadow-md' do %>
+        <%= image_tag 'icons/search', size: '20x20' %>
+      <% end %>
     <% end %>
 
     <div id="results" class="w-full mt-12 mb-8">
       <table class="table-auto w-full">
-        <thead>
+        <thead class="text-slate-700">
           <tr>
             <th>NPI</th>
             <th>Name</th>
             <th>Address</th>
-            <th>Type</th>
+            <th>Address Type</th>
             <th>Taxonomy</th>
           </tr>
         </thead>
@@ -32,10 +39,10 @@
           <% @result.each do |provider|  %>
             <tr>
               <td><%= provider.npi %></td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
+              <td><%= provider.name %></td>
+              <td><%= provider.main_address.address %></td>
+              <td><%= provider.main_address.address_type %></td>
+              <td><%= provider.main_taxonomy.desc %></td>
             </tr>
           <% end %>
         </tbody>
