@@ -13,7 +13,7 @@ class SearchController < ApplicationController
   private
 
   def load_cache
-    @result = CachedResult.all
+    @result = ProviderCache.all
     return if search_params[:search_key].nil?
 
     @search_key = search_params[:search_key]
