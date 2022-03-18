@@ -22,6 +22,7 @@ class SearchController < ApplicationController
     if provider_not_found
       cached_provider = import_provider
       @result = [cached_provider] + @result.to_a
+      @result.flatten!
     end
 
     flash[:notice] = "Provider found!"

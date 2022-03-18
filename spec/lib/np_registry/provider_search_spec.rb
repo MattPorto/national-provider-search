@@ -27,7 +27,13 @@ RSpec.describe ProviderSearch, type: :lib do
       search_key = "1528036704" # NPI number example from internet
 
       expect { import_provider search_key }.to change(ProviderCache, :count).by(1)
-      expect(ProviderCache.last.npi).to eq search_key
+
+      provider = ProviderCache.last
+
+      expect(provider.npi).to eq search_key
+      expect(provider.name).to eq 'SMITH JACK'
+      expect(provider.addresses.count).to eq 2
+      expect(provider.taxonomies.count).to eq 1
     end
 
     def import_provider(search_key)
