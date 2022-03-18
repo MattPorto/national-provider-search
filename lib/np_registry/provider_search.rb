@@ -32,7 +32,7 @@ class ProviderSearch < Base
   end
 
   def save_provider
-    CachedResult.create npi: @number # , search_count: 1
+    ProviderCache.create npi: @number # , search_count: 1
 
     # results = parsed_response['results']
     # providers_list = results.map { |r| { npi: r['number'], search_count: 1 } }
